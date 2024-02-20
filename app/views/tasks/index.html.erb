@@ -1,0 +1,24 @@
+<div class="container mt-5">
+  <h1>Liste des tâches</h1>
+  <% @tasks.each do |task| %>
+    <div class="row mb-2">
+      <div class="col-sm-1">
+        <%= check_box_tag "completed_#{task.id}", "completed", task.completed, disabled: true, class: "form-check-input" %>
+      </div>
+      <div class="col-sm-9">
+        <%= link_to task.title, task_path(task), class: "text-decoration-none" %><br>
+        <small class="text-muted"><%= task.details %></small>
+      </div>
+      <div class="col-sm-2 text-end">
+        <%= link_to edit_task_path(task) do %>
+          <i class="fas fa-edit"></i> Éditer
+        <% end %>
+        <%= link_to task_path(task), method: :delete, data: { confirm: 'Es-tu sûr de vouloir supprimer cette tâche ?' }, class: "text-danger" do %>
+          <i class="fas fa-trash-alt"></i> Supprimer
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+  <%= link_to 'Ajouter une nouvelle tâche', new_task_path, class: "btn btn-primary mt-3" %>
+</div>
+
